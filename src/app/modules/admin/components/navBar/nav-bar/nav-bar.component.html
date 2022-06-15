@@ -1,0 +1,18 @@
+<div class="bg-primary grid flex sm:flex-wrap">
+    <div class="inline-block p-3 col ">
+        <button pButton type="button" icon="pi pi-list" class="p-button-raised m-2" (click)="display=true"></button>
+        <p-sidebar [(visible)]="display" position="left" styleClass="p-sidebar-sm">
+            <h1>Content</h1>
+            <p-panelMenu [model]="items" [style]="{'width':'300px'}"></p-panelMenu>
+        </p-sidebar>
+    </div>
+    <div class="inline-block p-2 col ">
+        <h1 class="text-center">This is the navigation bar</h1>
+
+    </div>
+    <div class="flex flex-row-reverse  p-3 col ">
+        <button pButton type="button" routerLink="register" class="flex p-button-raised shadow-6 inline-block m-2 ">Sign In</button>
+        <button pButton type="button" routerLink="login" class="flex p-button-secondary shadow-6 m-2 p-button-raised  inline-block  ">Log In</button>
+
+    </div>
+</div>

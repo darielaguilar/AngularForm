@@ -1,0 +1,29 @@
+<p-card [style]="{'width': '25em', 'margin-bottom': '2em','margin-top':'2em'}" class=" col-1 col-offset-4 border-600 border-round-md">
+
+    <div class="card-container flex-column  align-items-center">
+        <h1 class="col-offset-2">Sign in</h1>
+        <form class="m-2 col-offset-2" [formGroup]="loginForm">
+            <label>
+        Email
+        <input type="text" class="flex flex-column " name="username" formControlName="username" pInputText  autocomplete="off"/>
+      </label>
+            <div class="errors-container" *ngIf="emailControl.invalid && (emailControl.touched || emailControl.dirty)">
+                <p class="error-msg" *ngIf="emailControl.hasError('required')">El campo es obligatorio</p>
+                <p class="error-msg" *ngIf="emailControl.hasError('email')">El campo debe ser un email valido</p>
+            </div>
+            <label>
+        Password
+        <p-password class="flex flex-column"  formControlName="password" [feedback]="false">
+
+      </p-password>
+      <div class="errors-container" *ngIf="passwordControl.invalid && (passwordControl.touched || passwordControl.dirty)">
+        <p class="error-msg" *ngIf="passwordControl.hasError('required')">El campo es obligatorio</p>
+
+      </div>
+      </label>
+            <button pButton type="submit" class="m-2" [disabled]="(loginForm.statusChanges|async)!== 'VALID'" (click)="signIn()">Submit</button>
+        </form>
+    </div>
+</p-card>
+{{loginForm.status}}
+<pre>{{loginForm.value | json}}</pre>
