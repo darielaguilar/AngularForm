@@ -9,7 +9,7 @@ import {MenuItem, PrimeNGConfig} from 'primeng/api';
 export class NavBarComponent implements OnInit {
   display: boolean;
   items:MenuItem[];
-  constructor(private primengConfig: PrimeNGConfig) {
+  constructor() {
     this.display = false;
     this.items=[
       {
@@ -33,7 +33,6 @@ export class NavBarComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.primengConfig.ripple = true;
   }
 
 }
