@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, EMPTY, throwError } from 'rxjs';
-import {HttpClientModule,HttpClient,HttpResponse} from '@angular/common/http'
 
-import { Observable } from 'rxjs';
-import {catchError, ignoreElements, map, tap} from 'rxjs/operators';
+import {HttpClient,HttpResponse,HttpHeaders} from '@angular/common/http'
+
+import { AuthServiceService } from './auth-service.service';
 import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { IUser } from '../interfaces/IUser';
 
-import { ILoginCredentials } from './interfaz-loginCredentials';
-import { SuccesfulLoginDto } from './interfaz-SuccesfulLoginDto';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,15 +20,17 @@ export class ApiService {
 
    }
 
-   getObject(path:string):any{
-      this.http.get<Array<any>>(`${this.baseUrl}/`+path).subscribe();
+   getObject(path:string,token: {headers?: HttpHeaders | {[header: string]: string | string[]}} ) :any{
+
+
+      return this.http.get(`${this.baseUrl}/`+path,token);
    }
 
    postObject(path:string, objPost:Object):void{
-      this.http.post<Array<any>>(`${this.baseUrl}/`+path,objPost)
+      this.http.post(`${this.baseUrl}/`+path,objPost)
    }
 
    deleteObject(path:string,objDel:Object):void{
-    this.http.delete<Array<any>>(`${this.baseUrl}/`+path,objDel)
+    this.http.delete(`${this.baseUrl}/`+path,objDel)
    }
 }

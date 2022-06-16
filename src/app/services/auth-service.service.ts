@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, EMPTY, throwError } from 'rxjs';
-import {HttpClientModule,HttpClient} from '@angular/common/http'
+import {HttpClient} from '@angular/common/http'
 
 import { Observable } from 'rxjs';
 import {catchError, ignoreElements, map, tap} from 'rxjs/operators';
@@ -18,13 +18,13 @@ export class AuthServiceService {
   private baseUrl = environment.serverUrl
   private loggedIn = new BehaviorSubject<boolean>(false);
   loggedIn$ = this.loggedIn.asObservable();
-  private _authToken: string | null=null
-  public get authToken():string|null{
+  private _authToken: string
+  public get authToken():string{
     return this._authToken
   }
 
 
-  constructor(private router:Router, private httpclient: HttpClient) { }
+  constructor(private router:Router, private httpclient: HttpClient) { this._authToken=''}
 
   login(credentials:ILoginCredentials):Observable<never>
   {
@@ -73,7 +73,7 @@ export class AuthServiceService {
 
   logOut():void{
     this.loggedIn.next(false);
-    this._authToken = null;
+    this._authToken = '';
     this.redirectHome()
   }
 
