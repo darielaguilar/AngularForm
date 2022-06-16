@@ -1,5 +1,5 @@
 import { Component, OnInit, Input,Output } from '@angular/core';
-import {MenuItem} from 'primeng/api';
+import {MenuItem, PrimeNGConfig} from 'primeng/api';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -9,7 +9,7 @@ import {MenuItem} from 'primeng/api';
 export class NavBarComponent implements OnInit {
   display: boolean;
   items:MenuItem[];
-  constructor() {
+  constructor(private primengConfig: PrimeNGConfig) {
     this.display = false;
     this.items=[
       {
@@ -33,7 +33,7 @@ export class NavBarComponent implements OnInit {
    }
 
   ngOnInit(): void {
-
+    this.primengConfig.ripple = true;
   }
 
 }

@@ -1,3 +1,4 @@
+import { PrimeNGConfig } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
@@ -9,12 +10,22 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 })
 export class AdminComponent implements OnInit {
 
-  constructor() {
+  navBarMD:boolean = false;
+  navBarSM:boolean = false;
+
+
+  constructor(private primengConfig: PrimeNGConfig) {
 
   }
 
   ngOnInit(): void {
+    this.primengConfig.ripple = true;
+  }
 
+
+  ToggleSideBar(){
+    this.navBarMD = !this.navBarMD;
+    this.navBarSM = !this.navBarSM;
   }
 
 }
