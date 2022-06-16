@@ -1,5 +1,5 @@
 import { Component, OnInit, Input,Output } from '@angular/core';
-import {MenuItem} from 'primeng/api';
+import {MenuItem, PrimeNGConfig} from 'primeng/api';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -33,7 +33,6 @@ export class NavBarComponent implements OnInit {
    }
 
   ngOnInit(): void {
-
   }
 
 }

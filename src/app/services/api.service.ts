@@ -20,10 +20,15 @@ export class ApiService {
 
    }
 
+<<<<<<< HEAD
    getObject(path:string,token: {headers?: HttpHeaders | {[header: string]: string | string[]}} ) :any{
 
 
       return this.http.get(`${this.baseUrl}/`+path,token);
+=======
+   getObject(path:string):any{
+      this.http.get<Array<any>>(`${this.baseUrl}/`+path)
+>>>>>>> b34e3390bd028e9725d5fa2fddd9c4558674c287
    }
 
    postObject(path:string, objPost:Object):void{

@@ -24,6 +24,7 @@ import { AdminComponent } from './admin.component';
 import { RouterModule } from '@angular/router';
 import {admin} from './admin.routing';
 import { DashboardComponent } from './components/dashboard/dashboard.component'
+import {MenubarModule} from 'primeng/menubar';
 @NgModule({
   imports: [
   CommonModule,
@@ -37,6 +38,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component'
   MenuModule,
   HttpClientModule,
   PanelMenuModule,
+  MenubarModule,
 
   ReactiveFormsModule,
   RouterModule.forChild(admin),
@@ -60,6 +62,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component'
   PanelMenuModule,
   DashboardComponent,
   ReactiveFormsModule,
+  MenubarModule,
 
 ]),
   declarations: [

@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, EMPTY, throwError } from 'rxjs';
+<<<<<<< HEAD
 import {HttpClient} from '@angular/common/http'
+=======
+import {HttpClientModule, HttpClient} from '@angular/common/http'
+>>>>>>> b34e3390bd028e9725d5fa2fddd9c4558674c287
 
 import { Observable } from 'rxjs';
 import {catchError, ignoreElements, map, tap} from 'rxjs/operators';
