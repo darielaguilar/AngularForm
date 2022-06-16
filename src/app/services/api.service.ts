@@ -23,7 +23,7 @@ export class ApiService {
    }
 
    getObject(path:string):any{
-      this.http.get<Array<any>>(`${this.baseUrl}/`+path).subscribe();
+      this.http.get<Array<any>>(`${this.baseUrl}/`+path)
    }
 
    postObject(path:string, objPost:Object):void{
