@@ -6,7 +6,7 @@ import { UserServiceService } from './services/user-service.service';
 import { Routes,Router,RouterLink,RouterModule,RouterOutlet } from '@angular/router';
 
 import { PageNotFoundComponent } from './modules/admin/components/page-not-found/page-not-found.component';
-import { AuthServiceService } from './services/auth-service.service';
+import { AuthService } from './services/auth-service.service';
 import { AdminModule } from './modules/admin/admin.module';
 import { AdminComponent } from './modules/admin/admin.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -22,7 +22,7 @@ const routes:Routes=[
 @NgModule({
   declarations: [
     AppComponent,
-    AdminComponent
+
 
   ],
 
@@ -35,7 +35,7 @@ const routes:Routes=[
 
 
   ],
-  providers: [{provide:AuthServiceService, useClass:AuthServiceService}, {provide:UserServiceService, useClass:UserServiceService} ],
+  providers: [{provide:AuthService, useClass:AuthService}, {provide:UserServiceService, useClass:UserServiceService} ],
   bootstrap: [AppComponent]
 })
 

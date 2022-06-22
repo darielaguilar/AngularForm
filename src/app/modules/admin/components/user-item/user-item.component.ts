@@ -2,7 +2,7 @@
 import { Component, Inject, NgModule, OnInit } from '@angular/core';
 
 import { UserServiceService } from 'src/app/services/user-service.service';
-import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { AuthService } from 'src/app/services/auth-service.service';
 import { Observable } from 'rxjs';
 import { IUser } from 'src/app/interfaces/IUser';
 

@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth-service.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
-  constructor(private router: Router){}
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean > | boolean {
+  constructor(private auth:AuthService ,private router: Router){}
+  canActivate(route:ActivatedRouteSnapshot,state: RouterStateSnapshot):  boolean | UrlTree {
     console.log(state.url)
-    if(state.url == '/admin')
-    {
-      this.router.navigate(['/admin/dashboard'])
-      return true
-    }
-    return true;
+    // if(state.url == '/admin')
+    // {
+    //   this.router.navigate(['/admin/dashboard'])
+    //   return true
+    // }
+    return this.auth.loginBool || this.router.parseUrl('login') ;
   }
 
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import {HttpClient,HttpResponse,HttpHeaders} from '@angular/common/http'
 
-import { AuthServiceService } from './auth-service.service';
+import { AuthService } from './auth-service.service';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { IUser } from '../interfaces/IUser';
@@ -20,22 +20,22 @@ export class ApiService {
 
    }
 
-<<<<<<< HEAD
    getObject(path:string,token: {headers?: HttpHeaders | {[header: string]: string | string[]}} ) :any{
 
 
       return this.http.get(`${this.baseUrl}/`+path,token);
-=======
-   getObject(path:string):any{
-      this.http.get<Array<any>>(`${this.baseUrl}/`+path)
->>>>>>> b34e3390bd028e9725d5fa2fddd9c4558674c287
    }
 
-   postObject(path:string, objPost:Object):void{
-      this.http.post(`${this.baseUrl}/`+path,objPost)
+   postObject(path:string, token: {headers?: HttpHeaders | {[header: string]: string | string[]}},objPost:Object):any{
+      return this.http.post<any>(`${this.baseUrl}/`+path,objPost,token).subscribe((response: HttpResponse<any>)=>{console.log(response.status);console.log(response.headers)})
    }
 
-   deleteObject(path:string,objDel:Object):void{
-    this.http.delete(`${this.baseUrl}/`+path,objDel)
+   deleteObject(path:string,token: {headers?: HttpHeaders | {[header: string]: string | string[]}}):any{
+    return this.http.delete(`${this.baseUrl}/`+path, token).subscribe((response: HttpResponse<any>)=>{console.log(response.status);console.log(response.headers)},
+    (error)=>console.log(error))
+   }
+
+   updateObject(path:string,objUpd:Object, token: {headers?: HttpHeaders | {[header: string]: string | string[]}}):any{
+    return this.http.put(`${this.baseUrl}/`+path,objUpd, token).subscribe((response: HttpResponse<any>)=>{console.log(response.status);console.log(response.headers)})
    }
 }

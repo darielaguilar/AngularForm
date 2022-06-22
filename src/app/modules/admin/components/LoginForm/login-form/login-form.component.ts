@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { AuthService } from 'src/app/services/auth-service.service';
 import {ILoginCredentials} from '../../../../../services/interfaz-loginCredentials'
 @Component({
   selector: 'app-login-form',
@@ -25,7 +25,7 @@ export class LoginFormComponent implements OnInit {
   }
 
 
-  constructor(private authService: AuthServiceService) {
+  constructor(private authService: AuthService) {
     this.IsLogged = false;
   }
 
@@ -41,4 +41,5 @@ export class LoginFormComponent implements OnInit {
     })
 
   }
+
 }

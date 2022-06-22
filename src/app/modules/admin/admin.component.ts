@@ -2,7 +2,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-
+import { AuthService } from 'src/app/services/auth-service.service';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -14,7 +14,7 @@ export class AdminComponent implements OnInit {
   navBarSM:boolean = false;
 
 
-  constructor(private primengConfig: PrimeNGConfig) {
+  constructor(private primengConfig: PrimeNGConfig, public auth:AuthService) {
 
   }
 

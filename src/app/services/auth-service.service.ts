@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, EMPTY, throwError } from 'rxjs';
-<<<<<<< HEAD
 import {HttpClient} from '@angular/common/http'
-=======
-import {HttpClientModule, HttpClient} from '@angular/common/http'
->>>>>>> b34e3390bd028e9725d5fa2fddd9c4558674c287
 
 import { Observable } from 'rxjs';
 import {catchError, ignoreElements, map, tap} from 'rxjs/operators';
@@ -18,10 +14,11 @@ import { SuccesfulLoginDto } from './interfaz-SuccesfulLoginDto';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthServiceService {
+export class AuthService {
   private baseUrl = environment.serverUrl
   private loggedIn = new BehaviorSubject<boolean>(false);
   loggedIn$ = this.loggedIn.asObservable();
+  loginBool:boolean=false
   private _authToken: string
   public get authToken():string{
     return this._authToken
@@ -70,6 +67,7 @@ export class AuthServiceService {
 
   private handleSuccesfulLogin(token:string):void{
     this.loggedIn.next(true);
+    this.loginBool = true
     this._authToken = token
     localStorage.setItem('token',this._authToken)
     this.redirectHome();
@@ -77,11 +75,16 @@ export class AuthServiceService {
 
   logOut():void{
     this.loggedIn.next(false);
+    this.loginBool = false
     this._authToken = '';
-    this.redirectHome()
+    this.redirectLogin()
+  }
+
+  private redirectLogin():void{
+    this.router.navigate(['login'])
   }
 
   private redirectHome():void{
-    this.router.navigate(['admin'])
+    this.router.navigate(['admin/dashboard'])
   }
 }

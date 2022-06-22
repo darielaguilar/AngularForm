@@ -23,22 +23,17 @@
                         <button pButton pRipple type="button" icon="pi pi-bell" class="p-button-rounded text-white p-button-text"></button>
                     </li>
                     <li class="nav-item mx-1">
-                        <button pButton pRipple type="button" icon="pi pi-sign-out" class="p-button-rounded text-white p-button-text"></button>
+                        <button pButton pRipple type="button" icon="pi pi-sign-out" (click)="auth.logOut()" class="p-button-rounded text-white p-button-text"></button>
                     </li>
                 </ul>
             </div>
         </nav>
 
         <!--Content-->
-        <router-outlet>
-        </router-outlet>
+        <app-dashboard></app-dashboard>
+
     </div>
     <!--Nav Bar-->
 
 
 </div>
-
-
-
-
-<app-nav-bar></app-nav-bar>

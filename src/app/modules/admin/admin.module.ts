@@ -9,22 +9,26 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {CardModule} from 'primeng/card';
 import {InputTextModule} from 'primeng/inputtext';
-
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {DialogModule} from 'primeng/dialog';
 import {PasswordModule} from 'primeng/password';
 import {DividerModule} from 'primeng/divider';
-
+import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from 'primeng/button';
 import {SidebarModule} from 'primeng/sidebar';
-
+import {TableModule} from 'primeng/table'
 import { HttpClientModule } from '@angular/common/http';
 import {MenuModule} from 'primeng/menu';
 import {PanelMenuModule} from 'primeng/panelmenu';
-import { AdminComponent } from './admin.component';
+import {CheckboxModule} from 'primeng/checkbox';
 import { RouterModule } from '@angular/router';
 import {admin} from './admin.routing';
 import { DashboardComponent } from './components/dashboard/dashboard.component'
 import {MenubarModule} from 'primeng/menubar';
+import {ToastModule} from 'primeng/toast';
+import {RippleModule} from 'primeng/ripple';
+import { AdminComponent } from './admin.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
 @NgModule({
   imports: [
   CommonModule,
@@ -39,17 +43,18 @@ import {MenubarModule} from 'primeng/menubar';
   HttpClientModule,
   PanelMenuModule,
   MenubarModule,
-
+  ConfirmDialogModule,
+  DialogModule,
+  TableModule,
+  ToastModule,
+  RippleModule,
+  ToolbarModule,
+  CheckboxModule,
   ReactiveFormsModule,
   RouterModule.forChild(admin),
 ],exports:([
-  LoginFormComponent,
-  NavBarComponent,
-  UserItemComponent,
-  UserItemListComponent,
-  RegisterFormComponent,
-  PageNotFoundComponent,
   CommonModule,
+  CheckboxModule,
   CardModule,
   InputTextModule,
   PasswordModule,
@@ -60,13 +65,17 @@ import {MenubarModule} from 'primeng/menubar';
   MenuModule,
   HttpClientModule,
   PanelMenuModule,
-  DashboardComponent,
-  ReactiveFormsModule,
   MenubarModule,
-
+  ConfirmDialogModule,
+  DialogModule,
+  TableModule,
+  ToastModule,
+  ToolbarModule,
+  ReactiveFormsModule,
+  RippleModule,
 ]),
   declarations: [
-
+    AdminComponent,
     LoginFormComponent,
     NavBarComponent,
     UserItemComponent,
@@ -75,6 +84,10 @@ import {MenubarModule} from 'primeng/menubar';
     PageNotFoundComponent,
     DashboardComponent,
 
+  ],
+  providers:[
+    ConfirmationService,
+    MessageService
   ]
 
 })

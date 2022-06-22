@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { AuthService } from 'src/app/services/auth-service.service';
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
@@ -22,7 +22,7 @@ export class RegisterFormComponent implements OnInit {
   }
 
 
-  constructor(private authService: AuthServiceService) {
+  constructor(private authService: AuthService) {
     this.IsLogged = false;
   }
 
