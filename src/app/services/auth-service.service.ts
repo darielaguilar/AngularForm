@@ -4,7 +4,8 @@ import {HttpClient} from '@angular/common/http'
 
 import { Observable } from 'rxjs';
 import {catchError, ignoreElements, map, tap} from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+//import { environment } from 'src/environments/environment';
+import { environmentProd } from 'src/environments/environment.prod';
 import { Router } from '@angular/router';
 
 import { ILoginCredentials } from './interfaz-loginCredentials';
@@ -15,7 +16,7 @@ import { SuccesfulLoginDto } from './interfaz-SuccesfulLoginDto';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = environment.serverUrl
+  private baseUrl = environmentProd.serverUrl
   private loggedIn = new BehaviorSubject<boolean>(false);
   loggedIn$ = this.loggedIn.asObservable();
   loginBool:boolean=false
