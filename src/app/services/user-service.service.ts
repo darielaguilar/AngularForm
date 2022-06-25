@@ -4,6 +4,7 @@ import { AppComponent } from '../app.component';
 import { Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { environmentProd } from 'src/environments/environment.prod';
 import { Token } from '@angular/compiler/src/ml_parser/tokens';
 import { FormGroup, FormsModule } from '@angular/forms';
 import { ApiService } from './api.service';
@@ -23,8 +24,8 @@ import { IUser } from '../interfaces/IUser';
 
 
 export class UserServiceService {
-  private ApiUrl = environment.serverUrl;
-
+  //private ApiUrl = environment.serverUrl;
+  private ApiUrl = environmentProd.serverUrl
 
   constructor(private api:ApiService,private auth:AuthService) {
 

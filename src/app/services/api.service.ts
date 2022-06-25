@@ -5,6 +5,7 @@ import {HttpClient,HttpResponse,HttpHeaders} from '@angular/common/http'
 
 import { AuthService } from './auth-service.service';
 import { environment } from 'src/environments/environment';
+import { environmentProd } from 'src/environments/environment.prod';
 import { Observable } from 'rxjs';
 import { IUser } from '../interfaces/IUser';
 
@@ -13,8 +14,8 @@ import { IUser } from '../interfaces/IUser';
 })
 //Este servicio sera para las solicitudes generales al backend otros servicios lo usaran como dependencia
 export class ApiService {
-  private baseUrl = environment.serverUrl
-
+  //private baseUrl = environment.serverUrl
+  private baseUrl = environmentProd.serverUrl
 
   constructor(private http:HttpClient) {
 
