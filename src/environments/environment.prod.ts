@@ -1,4 +1,4 @@
 export const environmentProd = {
   production: true,
-  serverUrl:"http://localhost:8000"
+  serverUrl:"https://ymgallerybackend.azurewebsites.net/"
 };
