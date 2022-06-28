@@ -13,6 +13,8 @@ export class AdminComponent implements OnInit {
   navBarMD:boolean = false;
   navBarSM:boolean = false;
 
+  user:any;
+
 
   constructor(private primengConfig: PrimeNGConfig, public auth:AuthService) {
 
@@ -20,6 +22,8 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
+
+    this.user = this.auth.getUser();
   }
 
 
