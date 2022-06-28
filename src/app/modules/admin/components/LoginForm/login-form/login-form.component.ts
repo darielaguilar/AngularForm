@@ -33,10 +33,19 @@ export class LoginFormComponent implements OnInit {
   }
   signIn(): void{
     const credentials = this.loginForm.value
-    console.log(credentials)
     this.loginForm.markAsPending()
 
-    this.authService.login(credentials).subscribe({
+    this.authService.login(credentials['username'], credentials['password']).subscribe({
+      next:(data) => {
+
+        this.authService.handleSuccesfulLogin(data['token'])
+        var user = {
+          'email': data['email'],
+          'username': data['username'],
+        }
+        this.authService.setUser(user)
+        this.authService.redirectHome()
+      },
       error:(err)=>this.loginForm.setErrors({invalidCredentials: true})
     })
 

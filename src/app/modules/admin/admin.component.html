@@ -5,8 +5,14 @@
 <div class="flex m-0 p-0">
     <!--Side Bar-->
     <!--Pantalla md-->
-    <div class="h-screen absolute md:relative z-1 md:z-0 bg-dark" [ngClass]="{'col-5 md:col-3 flex': navBarMD, 'hidden': !navBarMD}">
-        <h1 class="text-white">Side Bar</h1>
+    <div class="h-screen absolute md:relative z-1 md:z-0 bg-dark" [ngClass]="{'col-5 md:col-3 block': navBarMD, 'hidden': !navBarMD}">
+      <div class="flex md:hidden justify-content-end">
+        <button pButton pRipple type="button" icon="pi pi-arrow-left" class="p-button-rounded col-12 text-white p-button-text" (click)="ToggleSideBar()"></button>
+      </div>
+      <div class="flex justify-content-center mt-0 md:mt-5">
+        <p-avatar label="P" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+        <h2></h2>
+      </div>
     </div>
     <!--Pantalla sm-->
     <!-- <p-sidebar [(visible)]="navBarSM">
@@ -17,7 +23,8 @@
     <div class="col-12 md:col-12 m-0 p-0" [ngClass]="{'md:col-9': navBarMD, 'md:col-12': !navBarMD}">
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-4 m-0 ">
             <button pButton pRipple type="button" icon="pi pi-bars" class="p-button-rounded text-white p-button-text" (click)="ToggleSideBar()"></button>
-            <div class="flex ml-auto" id="">
+            <h1 class="ml-1 text-white">YM Gallery Administración</h1>
+            <div class="ml-auto" id="">
                 <ul class="navbar-nav flex flex-row justify-content-around me-auto mt-2 mt-lg-0">
                     <li class="nav-item active mx-1">
                         <button pButton pRipple type="button" icon="pi pi-bell" class="p-button-rounded text-white p-button-text"></button>

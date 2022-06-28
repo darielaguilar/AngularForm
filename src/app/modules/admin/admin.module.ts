@@ -29,6 +29,8 @@ import {ToastModule} from 'primeng/toast';
 import {RippleModule} from 'primeng/ripple';
 import { AdminComponent } from './admin.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import {AvatarModule} from 'primeng/avatar';
+import {AvatarGroupModule} from 'primeng/avatargroup';
 @NgModule({
   imports: [
   CommonModule,
@@ -51,6 +53,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   ToolbarModule,
   CheckboxModule,
   ReactiveFormsModule,
+  AvatarModule,
+  AvatarGroupModule,
   RouterModule.forChild(admin),
 ],exports:([
   CommonModule,
@@ -73,6 +77,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   ToolbarModule,
   ReactiveFormsModule,
   RippleModule,
+  AvatarModule,
+  AvatarGroupModule,
 ]),
   declarations: [
     AdminComponent,

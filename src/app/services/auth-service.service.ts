@@ -34,26 +34,34 @@ export class AuthService {
     }
   }
 
-  login(credentials:ILoginCredentials):Observable<never>
-  {
-
-    return this.httpclient.post<SuccesfulLoginDto>(`${this.baseUrl}/login/`,credentials).pipe(
-      tap(({token}) => this.handleSuccesfulLogin(token)),
-      ignoreElements(),
-      catchError((error)=>{
-        if(error.status === 401)
-        {
-          return throwError('Error de credenciales invalidas');
-        }
-        else if(error.status === 400)
-        {
-          return throwError('Error de mal pedido')
-        }
-        alert('Se ha producido un error. Intentelo de nuevo');
-        return EMPTY;
-      })
-    );
+  login(username, password){
+    return this.httpclient.post<any[]>(`${this.baseUrl}/login/`, {
+      'username': username,
+      'password': password
+    })
   }
+
+  //Login de Dariel
+  // login(credentials:ILoginCredentials):Observable<never>
+  // {
+
+  //   return this.httpclient.post<SuccesfulLoginDto>(`${this.baseUrl}/login/`,credentials).pipe(
+  //     tap(({token}) => this.handleSuccesfulLogin(token)),
+  //     ignoreElements(),
+  //     catchError((error)=>{
+  //       if(error.status === 401)
+  //       {
+  //         return throwError('Error de credenciales invalidas');
+  //       }
+  //       else if(error.status === 400)
+  //       {
+  //         return throwError('Error de mal pedido')
+  //       }
+  //       alert('Se ha producido un error. Intentelo de nuevo');
+  //       return EMPTY;
+  //     })
+  //   );
+  // }
 
   register(credentials:ILoginCredentials):Observable<never>
   {
@@ -72,7 +80,7 @@ export class AuthService {
     );
   }
 
-  private handleSuccesfulLogin(token:string):void{
+  handleSuccesfulLogin(token:string):void{
     this.loggedIn.next(true);
     this.loginBool = true
     this._authToken = token
@@ -101,7 +109,19 @@ export class AuthService {
     this.router.navigate(['login'])
   }
 
-  private redirectHome():void{
+  redirectHome():void{
     this.router.navigate(['admin/dashboard'])
+  }
+
+  getToken(){
+    return localStorage.getItem('token')
+  }
+
+  setUser(user){
+    localStorage.setItem('user', JSON.stringify(user))
+  }
+
+  getUser(){
+    return JSON.parse(localStorage.getItem('user'))
   }
 }
