@@ -19,14 +19,20 @@ export class AuthService {
   private baseUrl = environmentProd.serverUrl
   private loggedIn = new BehaviorSubject<boolean>(false);
   loggedIn$ = this.loggedIn.asObservable();
-  loginBool:boolean=false
+  loginBool:boolean
   private _authToken: string
   public get authToken():string{
     return this._authToken
   }
 
 
-  constructor(private router:Router, private httpclient: HttpClient) { this._authToken=''}
+  constructor(private router:Router, private httpclient: HttpClient) {
+    if(this.isAuth)
+    {
+      this._authToken = localStorage.getItem('token')
+
+    }
+  }
 
   login(credentials:ILoginCredentials):Observable<never>
   {
@@ -72,6 +78,16 @@ export class AuthService {
     this._authToken = token
     localStorage.setItem('token',this._authToken)
     this.redirectHome();
+  }
+
+  isAuth():boolean{
+    if(localStorage.getItem('token')){
+
+      return true
+    }
+
+
+    return false
   }
 
   logOut():void{

@@ -9,14 +9,11 @@ import { AuthService } from '../services/auth-service.service';
 })
 export class AdminGuard implements CanActivate {
   constructor(private auth:AuthService ,private router: Router){}
+
   canActivate(route:ActivatedRouteSnapshot,state: RouterStateSnapshot):  boolean | UrlTree {
     console.log(state.url)
-    // if(state.url == '/admin')
-    // {
-    //   this.router.navigate(['/admin/dashboard'])
-    //   return true
-    // }
-    return this.auth.loginBool || this.router.parseUrl('login') ;
+
+    return this.auth.isAuth() || this.router.parseUrl('login') ;
   }
 
 }

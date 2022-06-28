@@ -11,7 +11,7 @@
 
     </p-toolbar>
 
-    <p-table #dt [value]="data" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll" [(selection)]="selectedUsers" [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    <p-table #dt [value]="data" [rows]="10" [paginator]="true" [globalFilterFields]="['name',]" responsiveLayout="scroll" [(selection)]="selectedUsers" [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [showCurrentPageReport]="true">
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">

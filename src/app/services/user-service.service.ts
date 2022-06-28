@@ -27,7 +27,7 @@ export class UserServiceService {
   //private ApiUrl = environment.serverUrl;
   private ApiUrl = environmentProd.serverUrl
 
-  constructor(private api:ApiService,private auth:AuthService) {
+  constructor(private api:ApiService,private auth:AuthService, private httpclient:HttpClient) {
 
    }
 
@@ -52,9 +52,11 @@ export class UserServiceService {
     })
     console.log('post hecho con'+JSON.stringify(user))
 
-     this.api.postObject('user-viewset/',{headers:headers},JSON.stringify(user))
-
+     //this.api.postObject('user-viewset/',{headers:headers},JSON.stringify(user))
+    return this.httpclient.post<any>(`${this.ApiUrl}/user-viewset/`,user,{headers:headers})
   }
+
+
 
   deleteUser(id:number){
     const headers = new HttpHeaders({
