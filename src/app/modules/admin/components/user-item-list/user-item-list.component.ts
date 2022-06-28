@@ -22,29 +22,32 @@ export class UserItemListComponent implements OnInit {
 
   data:any;
   DataUser$: Observable<IUser[]>;
+
   constructor(private userServ: UserServiceService, private confirm:ConfirmationService,private messageService: MessageService) {
     this.DataUser$ = this.userServ.getUserList();
 
    }
 
   ngOnInit(): void {
-    this.DataUser$.subscribe(
-      {next:(data)=>{this.data = data
-      this.users = data
-      console.log(data)
-
-      }},
-
-   )
-
-
-
+    this.loadTable()
   }
+
+
 
   openNew() {
     this.user = {};
     this.submitted = false;
     this.userDialog = true;
+}
+
+loadTable():void
+{
+  this.DataUser$.subscribe(
+    {next:(data)=>{this.data = data
+    this.users = data
+    console.log(data)
+    }},
+ )
 }
 
 editUser(user: IUser) {
@@ -72,6 +75,7 @@ deleteUser(user: IUser) {
       accept: () => {
           this.userServ.deleteUser(user.id)
           this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Deleted', life: 3000});
+          this.loadTable()
       }
   });
 }
@@ -89,13 +93,21 @@ saveUser() {
           this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Updated', life: 3000});
       }
       else {
-          this.userServ.postUser(this.user)
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Created', life: 3000});
+          this.userServ.postUser(this.user).subscribe({
+            next:(data)=> {
+              this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Created', life: 3000});
+              this.loadTable()
+            },
+            error:(err)=> {}
+          })
+
       }
 
       this.users = [...this.users];
       this.userDialog = false;
       this.user = {};
+
+
   }
 }
 
