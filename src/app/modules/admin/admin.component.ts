@@ -12,6 +12,7 @@ export class AdminComponent implements OnInit {
 
   navBarMD:boolean = false;
   navBarSM:boolean = false;
+  sideBarLock: boolean = false;
 
   user:any;
   itemsSideBar: MenuItem[];
@@ -28,7 +29,6 @@ export class AdminComponent implements OnInit {
     //Cargando items de side bar
     this.loadSideBarItems()
 
-
   }
 
 
@@ -37,17 +37,33 @@ export class AdminComponent implements OnInit {
     this.navBarSM = !this.navBarSM;
   }
 
+  toggleLockSideBar(){
+    this.sideBarLock = !this.sideBarLock
+    localStorage.setItem('lockSideBar', String(this.sideBarLock))
+  }
+
+  iconLock():string{
+    if(this.sideBarLock){
+      return "pi pi-lock"
+    }
+    else{
+      return "pi pi-lock-open"
+    }
+  }
+
   loadSideBarItems(){
     this.itemsSideBar = [
       {
           label: 'Dashboard',
           icon: 'pi pi-pw pi-microsoft',
           routerLink: '/admin/dashboard/',
+          command:()=>{if(!this.sideBarLock) this.ToggleSideBar()}
       },
       {
           label: 'Users',
           icon: 'pi pi-fw pi-user',
-          routerLink: '/admin/users/'
+          routerLink: '/admin/users/',
+          command:()=>{if(!this.sideBarLock) this.ToggleSideBar()}
       },
       {
           label: 'Paintings',
@@ -75,6 +91,21 @@ export class AdminComponent implements OnInit {
           ]
       }
     ];
+
+    // ver lock del side bar
+    if(localStorage.getItem('lockSideBar')){
+      var l = localStorage.getItem('lockSideBar')
+      if(l == 'true'){
+        this.sideBarLock = true
+      }
+      else{
+        this.sideBarLock = false
+      }
+    }
+    else{
+      this.sideBarLock = true
+    }
+
 
     //obtengo user agent
     var ua = navigator.userAgent;

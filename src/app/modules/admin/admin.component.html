@@ -14,6 +14,10 @@
     background-color:#212529 !important;
     border-color:#212529 !important;
   }
+
+  :host ::ng-deep .p-button:focus{
+    box-shadow: none;
+  }
 </style>
 
 <div class="flex m-0 p-0">
@@ -22,6 +26,9 @@
     <div class="h-screen px-2 absolute md:relative z-1 md:z-0 bg-dark overflow-y-auto overflow-x-hidden" [ngClass]="{'col-7 md:col-3 block': navBarMD, 'hidden': !navBarMD}">
       <div class="flex md:hidden justify-content-end">
         <button pButton pRipple type="button" icon="pi pi-arrow-left" class="p-button-rounded col-12 text-white p-button-text" (click)="ToggleSideBar()"></button>
+      </div>
+      <div class="hidden md:flex justify-content-end">
+        <button pButton pRipple type="button" [icon]="iconLock()" class="p-button-rounded col-12 text-white p-button-text" (click)="toggleLockSideBar()"></button>
       </div>
       <div class="flex justify-content-center mt-0 md:mx-3">
         <div class="m-2 p-3 text-center">
