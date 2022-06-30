@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../services/auth-service.service';
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from 'src/app/services/user-service.service';
 import { Observable, pipe } from 'rxjs';
@@ -23,7 +24,7 @@ export class UserItemListComponent implements OnInit {
   data:any;
   DataUser$: Observable<IUser[]>;
 
-  constructor(private userServ: UserServiceService, private confirm:ConfirmationService,private messageService: MessageService) {
+  constructor(private authService: AuthService, private userServ: UserServiceService, private confirm:ConfirmationService,private messageService: MessageService) {
     this.DataUser$ = this.userServ.getUserList();
 
    }
@@ -42,11 +43,26 @@ export class UserItemListComponent implements OnInit {
 
 loadTable():void
 {
-  this.DataUser$.subscribe(
-    {next:(data)=>{this.data = data
-    this.users = data
-    console.log(data)
-    }},
+  this.userServ.getUserList().subscribe(
+    {
+      next:(data)=>{
+        this.data = data
+        this.users = data
+      },
+      error:(error)=>{
+        Object.entries(error.error).forEach(([key, value]) =>{
+          if(key == 'detail'){
+            this.messageService.add({severity:'error', summary:`Sesión`, detail:`Sesión expirada`});
+            setTimeout(()=>{
+              this.authService.logOut()
+            }, 2000)
+          }
+          else{
+            this.messageService.add({severity:'error', summary:`Error en el Campo ${key}`, detail:`${value}`});
+          }
+        })
+      }
+    },
  )
 }
 

@@ -1,22 +1,39 @@
 <style>
 
+  :host ::ng-deep .p-panelmenu .p-panelmenu-header > a:focus{
+    box-shadow:none;
+  }
+
+  :host ::ng-deep .p-panelmenu .p-panelmenu-header > a:hover{
+    transform: scale(110%);
+    z-index: 1000;
+  }
+
+  :host ::ng-deep .p-menuitem-link-active{
+    color:#fff !important;
+    background-color:#212529 !important;
+    border-color:#212529 !important;
+  }
 </style>
 
 <div class="flex m-0 p-0">
     <!--Side Bar-->
     <!--Pantalla md-->
-    <div class="h-screen absolute md:relative z-1 md:z-0 bg-dark" [ngClass]="{'col-7 md:col-3 block': navBarMD, 'hidden': !navBarMD}">
+    <div class="h-screen px-2 absolute md:relative z-1 md:z-0 bg-dark overflow-y-auto overflow-x-hidden" [ngClass]="{'col-7 md:col-3 block': navBarMD, 'hidden': !navBarMD}">
       <div class="flex md:hidden justify-content-end">
         <button pButton pRipple type="button" icon="pi pi-arrow-left" class="p-button-rounded col-12 text-white p-button-text" (click)="ToggleSideBar()"></button>
       </div>
-      <div class="flex justify-content-center mt-0 md:m-3">
+      <div class="flex justify-content-center mt-0 md:mx-3">
         <div class="m-2 p-3 text-center">
           <p-avatar [label]="user.username.charAt(0) | uppercase" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
           <h5 class="text-white">{{ user.username }}</h5>
           <h6 class="text-white">{{ user.email }}</h6>
         </div>
       </div>
-      <div class="py-1 bg-white w-100"></div>
+      <div class=" bg-white w-100" style="height:1px;"></div>
+      <div class="mt-3">
+        <p-panelMenu [model]="itemsSideBar" styleClass="bg-dark" [style]="{'width':'100%'}"></p-panelMenu>
+      </div>
     </div>
     <!--Pantalla sm-->
     <!-- <p-sidebar [(visible)]="navBarSM">
@@ -41,9 +58,9 @@
         </nav>
 
         <!--Content-->
-        <app-dashboard></app-dashboard>
-
-
+        <div class="m-3">
+          <router-outlet></router-outlet>
+        </div>
     </div>
     <!--Nav Bar-->
 

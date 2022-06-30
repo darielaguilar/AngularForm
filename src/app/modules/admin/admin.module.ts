@@ -31,6 +31,7 @@ import { AdminComponent } from './admin.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import {AvatarModule} from 'primeng/avatar';
 import {AvatarGroupModule} from 'primeng/avatargroup';
+
 @NgModule({
   imports: [
   CommonModule,

@@ -10,6 +10,8 @@ import { AuthService } from './services/auth-service.service';
 import { AdminModule } from './modules/admin/admin.module';
 import { AdminComponent } from './modules/admin/admin.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenIntercertorService } from './interceptors/token-intercertor.service';
 const routes:Routes=[
 
   //Authentication routes
@@ -35,11 +37,17 @@ const routes:Routes=[
 
 
   ],
-  providers: [{provide:AuthService, useClass:AuthService}, {provide:UserServiceService, useClass:UserServiceService} ],
+  providers: [
+    {provide:AuthService, useClass:AuthService},
+    {provide:UserServiceService, useClass:UserServiceService},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenIntercertorService,
+      multi: true
+    },
+   ],
   bootstrap: [AppComponent]
 })
-
-
 export class AppModule {
 
  }

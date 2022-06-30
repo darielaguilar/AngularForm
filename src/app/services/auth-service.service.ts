@@ -17,20 +17,21 @@ import { SuccesfulLoginDto } from './interfaz-SuccesfulLoginDto';
 })
 export class AuthService {
   private baseUrl = environmentProd.serverUrl
-  private loggedIn = new BehaviorSubject<boolean>(false);
-  loggedIn$ = this.loggedIn.asObservable();
-  loginBool:boolean
-  private _authToken: string
+  // private loggedIn = new BehaviorSubject<boolean>(false);
+  // loggedIn$ = this.loggedIn.asObservable();
+  // loginBool:boolean
+
   public get authToken():string{
     return this._authToken
   }
+
+  private _authToken: string
 
 
   constructor(private router:Router, private httpclient: HttpClient) {
     if(this.isAuth)
     {
       this._authToken = localStorage.getItem('token')
-
     }
   }
 
@@ -41,11 +42,9 @@ export class AuthService {
     })
   }
 
-  //Login de Dariel
-  // login(credentials:ILoginCredentials):Observable<never>
+  // register(credentials:ILoginCredentials):Observable<never>
   // {
-
-  //   return this.httpclient.post<SuccesfulLoginDto>(`${this.baseUrl}/login/`,credentials).pipe(
+  //   return this.httpclient.post<SuccesfulLoginDto>(`${this.baseUrl}/register/`,credentials).pipe(
   //     tap(({token}) => this.handleSuccesfulLogin(token)),
   //     ignoreElements(),
   //     catchError((error)=>{
@@ -53,36 +52,16 @@ export class AuthService {
   //       {
   //         return throwError('Error de credenciales invalidas');
   //       }
-  //       else if(error.status === 400)
-  //       {
-  //         return throwError('Error de mal pedido')
-  //       }
-  //       alert('Se ha producido un error. Intentelo de nuevo');
-  //       return EMPTY;
+
+  //       alert('Se ha producido un error. Intentelo de nuevo')
+  //       return EMPTY
   //     })
   //   );
   // }
 
-  register(credentials:ILoginCredentials):Observable<never>
-  {
-    return this.httpclient.post<SuccesfulLoginDto>(`${this.baseUrl}/register/`,credentials).pipe(
-      tap(({token}) => this.handleSuccesfulLogin(token)),
-      ignoreElements(),
-      catchError((error)=>{
-        if(error.status === 401)
-        {
-          return throwError('Error de credenciales invalidas');
-        }
-
-        alert('Se ha producido un error. Intentelo de nuevo')
-        return EMPTY
-      })
-    );
-  }
-
   handleSuccesfulLogin(token:string):void{
-    this.loggedIn.next(true);
-    this.loginBool = true
+    // this.loggedIn.next(true);
+    // this.loginBool = true
     this._authToken = token
     localStorage.setItem('token',this._authToken)
     this.redirectHome();
@@ -90,18 +69,16 @@ export class AuthService {
 
   isAuth():boolean{
     if(localStorage.getItem('token')){
-
       return true
     }
-
-
     return false
   }
 
   logOut():void{
-    this.loggedIn.next(false);
-    this.loginBool = false
+    // this.loggedIn.next(false);
+    // this.loginBool = false
     this._authToken = '';
+    localStorage.clear()
     this.redirectLogin()
   }
 

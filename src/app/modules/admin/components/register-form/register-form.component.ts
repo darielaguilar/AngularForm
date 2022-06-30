@@ -33,8 +33,8 @@ export class RegisterFormComponent implements OnInit {
     console.log(credentials)
     this.registerForm.markAsPending()
 
-    this.authService.register(credentials).subscribe({
-      error:(err)=>this.registerForm.setErrors({invalidCredentials: true})
-    })
+    // this.authService.register(credentials).subscribe({
+    //   error:(err)=>this.registerForm.setErrors({invalidCredentials: true})
+    // })
   }
 }

@@ -1,4 +1,4 @@
-import { PrimeNGConfig } from 'primeng/api';
+import { MenuItem, PrimeNGConfig } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
@@ -14,6 +14,7 @@ export class AdminComponent implements OnInit {
   navBarSM:boolean = false;
 
   user:any;
+  itemsSideBar: MenuItem[];
 
 
   constructor(private primengConfig: PrimeNGConfig, public auth:AuthService) {
@@ -24,12 +25,54 @@ export class AdminComponent implements OnInit {
     this.primengConfig.ripple = true;
 
     this.user = this.auth.getUser();
+    //Cargando items de side bar
+    this.loadSideBarItems()
   }
 
 
   ToggleSideBar(){
     this.navBarMD = !this.navBarMD;
     this.navBarSM = !this.navBarSM;
+  }
+
+  loadSideBarItems(){
+    this.itemsSideBar = [
+      {
+          label: 'Dashboard',
+          icon: 'pi pi-pw pi-microsoft',
+          routerLink: '/admin/dashboard/',
+      },
+      {
+          label: 'Users',
+          icon: 'pi pi-fw pi-user',
+          routerLink: '/admin/users/'
+      },
+      {
+          label: 'Paintings',
+          icon: 'pi pi-fw pi-pencil',
+      },
+      {
+          label: 'Actions',
+          icon: 'pi pi-fw pi-cog',
+          items: [
+              {
+                  label: 'Edit',
+                  icon: 'pi pi-fw pi-pencil',
+                  items: [
+                      {label: 'Save', icon: 'pi pi-fw pi-save'},
+                      {label: 'Update', icon: 'pi pi-fw pi-save'},
+                  ]
+              },
+              {
+                  label: 'Other',
+                  icon: 'pi pi-fw pi-tags',
+                  items: [
+                      {label: 'Delete', icon: 'pi pi-fw pi-minus'}
+                  ]
+              }
+          ]
+      }
+    ];
   }
 
 }

@@ -3,7 +3,7 @@ import {HttpClientModule,HttpClient, HttpHeaders} from '@angular/common/http'
 import { AppComponent } from '../app.component';
 import { Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
-//import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 import { environmentProd } from 'src/environments/environment.prod';
 import { Token } from '@angular/compiler/src/ml_parser/tokens';
 import { FormGroup, FormsModule } from '@angular/forms';
@@ -24,8 +24,8 @@ import { IUser } from '../interfaces/IUser';
 
 
 export class UserServiceService {
-  //private ApiUrl = environment.serverUrl;
-  private ApiUrl = environmentProd.serverUrl
+  private ApiUrl = environment.serverUrl;
+  //private ApiUrl = environmentProd.serverUrl
 
   constructor(private api:ApiService,private auth:AuthService, private httpclient:HttpClient) {
 
@@ -38,11 +38,15 @@ export class UserServiceService {
     return this.api.getObject('user-viewset/'+id, {headers:headers})
   }
 
-  getUserList():Observable<IUser[]>{
-    const headers = new HttpHeaders({
-      'Authorization': 'Token ' + this.auth.authToken
-    })
-    return this.api.getObject('user-viewset/', {headers:headers})
+  // getUserList():Observable<IUser[]>{
+  //   const headers = new HttpHeaders({
+  //     'Authorization': 'Token ' + this.auth.authToken
+  //   })
+  //   return this.api.getObject('user-viewset/', {headers:headers})
+  // }
+
+  getUserList(){
+    return this.httpclient.get<any[]>(`${this.ApiUrl}/user-viewset/`)
   }
 
   postUser(user:any):any{
