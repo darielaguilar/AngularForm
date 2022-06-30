@@ -24,6 +24,8 @@ export class UserItemListComponent implements OnInit {
   data:any;
   DataUser$: Observable<IUser[]>;
 
+  loader: boolean = true
+
   constructor(private authService: AuthService, private userServ: UserServiceService, private confirm:ConfirmationService,private messageService: MessageService) {
     this.DataUser$ = this.userServ.getUserList();
 
@@ -48,6 +50,7 @@ loadTable():void
       next:(data)=>{
         this.data = data
         this.users = data
+        this.loader = false
       },
       error:(error)=>{
         Object.entries(error.error).forEach(([key, value]) =>{

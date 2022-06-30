@@ -1,5 +1,15 @@
-<p-toast></p-toast>
+<style>
 
+  :host ::ng-deep .modalLoader.p-dialog-content{
+    padding: 10px;
+    border-radius: 20px;
+  }
+</style>
+
+<p-toast></p-toast>
+<p-dialog [(visible)]="loader" [modal]="true" [draggable]="false" [showHeader]="false" contentStyleClass="modalLoader" [transitionOptions]="'300ms'" >
+  <img src="assets/loader.gif" alt="" width="100">
+</p-dialog>
 
 <div class="card">
     <p-toolbar styleClass="mb-4">
@@ -31,13 +41,9 @@
                     <p-sortIcon field="name"></p-sortIcon>
                 </th>
                 <th>Email</th>
-                <th pSortableColumn="price">IsStaff
+                <th pSortableColumn="price">IsAdmin
                     <p-sortIcon field="price"></p-sortIcon>
                 </th>
-                <th pSortableColumn="category">IsAdmin
-                    <p-sortIcon field="category"></p-sortIcon>
-                </th>
-
 
                 <th></th>
             </tr>
@@ -52,10 +58,7 @@
                 <td>{{data.email}}</td>
 
                 <td>
-                    {{data.isStaff}}
-                </td>
-                <td>
-                    {{data.isActive}}
+                    {{data.is_staff}}
                 </td>
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editUser(data)"></button>
