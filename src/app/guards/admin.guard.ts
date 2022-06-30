@@ -13,7 +13,19 @@ export class AdminGuard implements CanActivate {
   canActivate(route:ActivatedRouteSnapshot,state: RouterStateSnapshot):  boolean | UrlTree {
     console.log(state.url)
 
-    return this.auth.isAuth() || this.router.parseUrl('login') ;
+    if(state.url == '/admin'){
+      if(this.auth.isAuth()){
+        this.router.navigate(['/admin/dashboard'])
+        return true
+      }
+      else{
+        this.router.navigate(['/admin/login'])
+      }
+    }
+
+    //return this.auth.isAuth() || this.router.parseUrl('login') ;
+
+    return true
   }
 
 }

@@ -5,15 +5,17 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginFormComponent } from './components/LoginForm/login-form/login-form.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { AdminGuard } from 'src/app/guards/admin.guard';
+
 export const admin:Routes = [
 
   {
-    path:'',component:AdminComponent,
+    path:'admin', component:AdminComponent,
     children:[
       {path:'dashboard', component:DashboardComponent},
       {path:'users', component:UserItemListComponent}
     ],
-    canActivate:[AdminGuard]},
+    canActivate:[AdminGuard]
+  },
   {path:'login', component:LoginFormComponent},
   {path:'register', component:RegisterFormComponent}
 ]

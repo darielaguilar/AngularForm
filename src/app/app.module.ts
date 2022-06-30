@@ -15,7 +15,8 @@ import { TokenIntercertorService } from './interceptors/token-intercertor.servic
 const routes:Routes=[
 
   //Authentication routes
-  {path:'admin', loadChildren: ()=> import("../app/modules/admin/admin.module").then((m)=>
+  {path:'', component:PageNotFoundComponent},
+  {path:'', loadChildren: ()=> import("../app/modules/admin/admin.module").then((m)=>
   m.AdminModule)},
 
   {path:'**', component:PageNotFoundComponent}
