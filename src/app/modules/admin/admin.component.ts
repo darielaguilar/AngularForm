@@ -94,16 +94,12 @@ export class AdminComponent implements OnInit {
 
     // ver lock del side bar
     if(localStorage.getItem('lockSideBar')){
-      var l = localStorage.getItem('lockSideBar')
-      if(l == 'true'){
+      if(localStorage.getItem('lockSideBar') == 'true'){
         this.sideBarLock = true
       }
       else{
         this.sideBarLock = false
       }
-    }
-    else{
-      this.sideBarLock = true
     }
 
 
