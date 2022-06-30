@@ -27,6 +27,8 @@ export class AdminComponent implements OnInit {
     this.user = this.auth.getUser();
     //Cargando items de side bar
     this.loadSideBarItems()
+
+
   }
 
 
@@ -73,6 +75,19 @@ export class AdminComponent implements OnInit {
           ]
       }
     ];
+
+    //obtengo user agent
+    var ua = navigator.userAgent;
+
+    // Compruebo el tipo de dispositivo en el que estoy
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua))
+    {
+       this.navBarMD = false
+    }
+    else
+    {
+      this.navBarMD = true
+    }
   }
 
 }
