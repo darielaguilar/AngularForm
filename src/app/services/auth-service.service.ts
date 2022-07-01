@@ -4,19 +4,18 @@ import {HttpClient} from '@angular/common/http'
 
 import { Observable } from 'rxjs';
 import {catchError, ignoreElements, map, tap} from 'rxjs/operators';
-//import { environment } from 'src/environments/environment';
-import { environmentProd } from 'src/environments/environment.prod';
 import { Router } from '@angular/router';
 
 import { ILoginCredentials } from './interfaz-loginCredentials';
 import { SuccesfulLoginDto } from './interfaz-SuccesfulLoginDto';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = environmentProd.serverUrl
+  baseUrl = environment
   // private loggedIn = new BehaviorSubject<boolean>(false);
   // loggedIn$ = this.loggedIn.asObservable();
   // loginBool:boolean
