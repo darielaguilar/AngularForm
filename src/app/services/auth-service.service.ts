@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl = environment
+  baseUrl = environment.serverUrl
   // private loggedIn = new BehaviorSubject<boolean>(false);
   // loggedIn$ = this.loggedIn.asObservable();
   // loginBool:boolean
