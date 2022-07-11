@@ -1,0 +1,89 @@
+<div class="card">
+
+    <p-dataView #dv [value]="paintings" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+        <ng-template pTemplate="header">
+            <div class="flex flex-column md:flex-row md:justify-content-between">
+                <p-dropdown [options]="sortOptions" [(ngModel)]="sortField" placeholder="Sort By Price" (onChange)="onSortChange($event)" styleClass="mb-2 md:mb-0"></p-dropdown>
+                <span class="p-input-icon-left mb-2 md:mb-0">
+                  <i class="pi pi-search"></i>
+                  <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($any($event.target).value,'contains')">
+              </span>
+                <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </div>
+        </ng-template>
+        <ng-template let-paint pTemplate="listItem">
+            <div class="col-12">
+                <div class="product-list-item">
+                    <img [src]="'http://localhost:8000' + paint.img" [alt]="paint.name" width="250" />
+                    <div class="product-list-detail">
+                        <div class="product-name">{{paint.name}}</div>
+                        <div class="product-description">{{paint.description}}</div>
+                        <p-rating [ngModel]="paint.rating" [readonly]="true" [cancel]="false"></p-rating>
+                        <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{paint.category}}</span>
+                    </div>
+                    <div class="product-list-action">
+                        <span class="product-price">${{paint.price}}</span>
+                        <!--<p-button icon="pi pi-shopping-cart" label="Add to Cart" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"></p-button>
+                        <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>-->
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template let-paint pTemplate="gridItem">
+            <div class="col-12 md:col-4">
+                <div class="product-grid-item card">
+                    <div class="product-grid-item-top">
+                        <div>
+                            <i class="pi pi-tag product-category-icon"></i>
+                            <!--<span class="product-category">{{paint.name}}</span>-->
+                        </div>
+                        <!--<span [class]="'product-badge status-' + paint.inventoryStatus.toLowerCase()">{{paint.inventoryStatus}}</span>-->
+                    </div>
+                    <div class="product-grid-item-content">
+                        <img [src]="'http://localhost:8000' + paint.img" [alt]="paint.name" width="250" height="250" />
+                        <div class="product-name">{{paint.name}}</div>
+                        <div class="product-description">{{paint.description}}</div>
+                        <p-rating [ngModel]="paint.rating" [readonly]="true" [cancel]="false"></p-rating>
+                    </div>
+                    <div class="product-grid-item-bottom">
+                        <span class="product-price">${{paint.price}}</span>
+                        <!--<p-button icon="pi pi-shopping-cart" [disabled]="paint.inventoryStatus === 'OUTOFSTOCK'"></p-button>-->
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+    <p-dialog [(visible)]="paintDialog" [style]="{width: '450px'}" header="Paint Details" [modal]="true" styleClass="p-fluid">
+        <ng-template pTemplate="content">
+
+            <div class="field">
+                <label for="name">Name</label>
+                <input type="text" pInputText id="name" [(ngModel)]="paint.name" required autofocus />
+                <small class="p-error" *ngIf="submitted && !paint.name">Name is required.</small>
+            </div>
+            <div class="field">
+                <label for="email">Paint</label>
+                <p-fileUpload name="myfile[]" url="localhost:8000/static/" accept="image/*"></p-fileUpload>
+                <small class="p-error" *ngIf="submitted && !paint.img">Image is required.</small>
+            </div>
+            <!--<div class="field">
+                <label for="password">Password</label>
+                <input id="password" type="password" pPassword [(ngModel)]="user.password" required />
+
+                <small class="p-error" *ngIf="submitted && !data.password">Password is required.</small>
+            </div>-->
+
+
+
+
+
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="savePaint()"></button>
+        </ng-template>
+    </p-dialog>
+</div>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

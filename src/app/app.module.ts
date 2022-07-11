@@ -12,10 +12,12 @@ import { AdminComponent } from './modules/admin/admin.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenIntercertorService } from './interceptors/token-intercertor.service';
+import { DashboardComponent } from './modules/admin/components/dashboard/dashboard.component';
+import { AdminGuard } from './guards/admin.guard';
 const routes:Routes=[
 
   //Authentication routes
-  {path:'', component:PageNotFoundComponent},
+  {path:'', component:AdminComponent,canActivate:[AdminGuard]},
   {path:'', loadChildren: ()=> import("../app/modules/admin/admin.module").then((m)=>
   m.AdminModule)},
 

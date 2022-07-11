@@ -68,6 +68,8 @@ export class AdminComponent implements OnInit {
       {
           label: 'Paintings',
           icon: 'pi pi-fw pi-pencil',
+          routerLink: '/admin/paintings',
+          command:()=>{if(!this.sideBarLock) this.ToggleSideBar()}
       },
       {
           label: 'Actions',

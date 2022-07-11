@@ -4,6 +4,7 @@ import { LoginFormComponent } from './components/LoginForm/login-form/login-form
 import { NavBarComponent } from './components/navBar/nav-bar/nav-bar.component';
 import { UserItemComponent } from './components/user-item/user-item.component';
 import { UserItemListComponent } from './components/user-item-list/user-item-list.component';
+import { PaintingsListComponent } from './components/paintings-list/paintings-list.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -31,7 +32,10 @@ import { AdminComponent } from './admin.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import {AvatarModule} from 'primeng/avatar';
 import {AvatarGroupModule} from 'primeng/avatargroup';
-
+import {DataViewModule} from 'primeng/dataview';
+import {DropdownModule} from 'primeng/dropdown';
+import {RatingModule} from 'primeng/rating';
+import {FileUploadModule} from 'primeng/fileupload';
 @NgModule({
   imports: [
   CommonModule,
@@ -57,6 +61,10 @@ import {AvatarGroupModule} from 'primeng/avatargroup';
   AvatarModule,
   AvatarGroupModule,
   RouterModule.forChild(admin),
+  DataViewModule,
+  DropdownModule,
+  RatingModule,
+  FileUploadModule
 ],exports:([
   CommonModule,
   CheckboxModule,
@@ -80,6 +88,10 @@ import {AvatarGroupModule} from 'primeng/avatargroup';
   RippleModule,
   AvatarModule,
   AvatarGroupModule,
+  DataViewModule,
+  DropdownModule,
+  RatingModule,
+  FileUploadModule
 ]),
   declarations: [
     AdminComponent,
@@ -90,6 +102,7 @@ import {AvatarGroupModule} from 'primeng/avatargroup';
     RegisterFormComponent,
     PageNotFoundComponent,
     DashboardComponent,
+    PaintingsListComponent,
 
   ],
   providers:[

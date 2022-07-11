@@ -27,7 +27,7 @@ export class UserItemListComponent implements OnInit {
   loader: boolean = true
 
   constructor(private authService: AuthService, private userServ: UserServiceService, private confirm:ConfirmationService,private messageService: MessageService) {
-    this.DataUser$ = this.userServ.getUserList();
+    //this.DataUser$ = this.userServ.getUserList();
 
    }
 
@@ -80,8 +80,21 @@ editUser(user: IUser) {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
             this.data = this.data.filter(val => !this.selectedUsers.includes(val));
+            let tempArr = this.data.filter(val => !this.selectedUsers.includes(val));
+            for(let i of this.selectedUsers){
+              console.log(i.id)
+              this.userServ.deleteUser(i.id).subscribe({
+                next:(data)=>{
+                  this.messageService.add({severity:'success', summary: 'Successful', detail: 'Products Deleted', life: 3000});
+                  this.loadTable()
+                },
+                error:(err) => {
+                  console.log(err)
+                }
+              })
+            }
             this.selectedUsers = [];
-            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Products Deleted', life: 3000});
+
         }
     });
 }
@@ -108,8 +121,15 @@ saveUser() {
 
   if (this.user.name.trim()) {
       if (this.user.id) {
-          this.userServ.updateUser(this.user.id,this.user);
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Updated', life: 3000});
+          this.userServ.updateUser(this.user.id,this.user).subscribe({
+            next:()=>{
+              this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Updated', life: 3000});
+            },
+            error:(err)=>{console.log(err)}
+          }
+
+          );
+          this.loadTable();
       }
       else {
           this.userServ.postUser(this.user).subscribe({
@@ -117,7 +137,7 @@ saveUser() {
               this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Created', life: 3000});
               this.loadTable()
             },
-            error:(err)=> {}
+            error:(err)=> {console.log(err)}
           })
 
       }

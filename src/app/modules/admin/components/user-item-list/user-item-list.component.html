@@ -1,14 +1,13 @@
 <style>
-
-  :host ::ng-deep .modalLoader.p-dialog-content{
-    padding: 10px;
-    border-radius: 20px;
-  }
+     :host ::ng-deep .modalLoader.p-dialog-content {
+        padding: 10px;
+        border-radius: 20px;
+    }
 </style>
 
 <p-toast></p-toast>
-<p-dialog [(visible)]="loader" [modal]="true" [draggable]="false" [showHeader]="false" contentStyleClass="modalLoader" [transitionOptions]="'300ms'" >
-  <img src="assets/loader.gif" alt="" width="100">
+<p-dialog [(visible)]="loader" [modal]="true" [draggable]="false" [showHeader]="false" contentStyleClass="modalLoader" [transitionOptions]="'300ms'">
+    <img src="assets/loader.gif" alt="" width="100">
 </p-dialog>
 
 <div class="card">
@@ -89,12 +88,13 @@
         </div>
         <div class="field">
             <label for="password">Password</label>
-            <input id="password" pInputText [(ngModel)]="user.password" required />
+            <input id="password" type="password" pPassword [(ngModel)]="user.password" required />
+
             <small class="p-error" *ngIf="submitted && !data.password">Password is required.</small>
         </div>
         <div>
             <label for="IsStaff">Is Staff</label>
-            <p-checkbox id="IsActive" [(ngModel)]="user.isStaff"></p-checkbox>
+            <p-checkbox name="IsStaff" value="val1" [(ngModel)]="user.isStaff"></p-checkbox>
         </div>
         <!-- <div class="field">
             <label for="inventoryStatus">Inventory Status</label>

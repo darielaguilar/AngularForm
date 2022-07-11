@@ -63,15 +63,19 @@ export class UserServiceService {
     const headers = new HttpHeaders({
       'Authorization': 'Token ' + this.auth.authToken
     })
-    console.log(this.api.deleteObject('user-viewset/'+id, {headers:headers}))
+    //console.log(this.api.deleteObject('user-viewset/'+id, {headers:headers}))
     console.log('delete hecho con id: '+id)
-    this.api.deleteObject('user-viewset/'+id, {headers:headers})
+    //this.api.deleteObject('user-viewset/'+id, {headers:headers})
+
+    return this.httpclient.delete<any[]>(`${this.ApiUrl}/user-viewset/`+id,)
   }
   updateUser(id:number, user:IUser){
     const headers = new HttpHeaders({
       'Authorization': 'Token ' + this.auth.authToken
     })
-    this.api.updateObject('user-viewset/'+id+'/', user,{headers:headers})
+    //this.api.updateObject('user-viewset/'+id+'/', user,{headers:headers})
     console.log('update hecho con id: '+id+' user: '+JSON.stringify(user))
+
+    return this.httpclient.put(`${this.ApiUrl}/user-viewset/`+id,user)
   }
 }

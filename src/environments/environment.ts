@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
 
-  //serverUrl:"http://localhost:8000"
-  serverUrl:"https://ymgallerybackend.azurewebsites.net"
+  serverUrl:"http://localhost:8000"
+  //serverUrl:"https://ymgallerybackend.azurewebsites.net"
 };
 
 /*
