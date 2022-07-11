@@ -45,6 +45,7 @@ export class PaintingsListComponent implements OnInit {
     this.submitted = false;
   }
 
+  //Esta funcion es como el loadTable en user-item-list.ts
   loadDataView(){
     const headers = new HttpHeaders({
       'Authorization': 'Token ' + this.auth.authToken
@@ -70,11 +71,13 @@ export class PaintingsListComponent implements OnInit {
     })
   }
 
+
+  //Por ahora esta vacia pero es lo que se ejecuta cuando el click event del boton save del dialog se toca
   savePaint(){}
 
 
 
-
+  //Este evento tiene que ver con cambiar el tipo de ordenamiento en el DataView
   onSortChange(event) {
     let value = event.value;
 
