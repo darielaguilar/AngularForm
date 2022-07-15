@@ -24,8 +24,8 @@
                     </div>
                     <div class="product-list-action">
                         <span class="product-price">${{paint.price}}</span>
-                        <!--<p-button icon="pi pi-shopping-cart" label="Add to Cart" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"></p-button>
-                        <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>-->
+                        <p-button icon="pi pi-times" label="Delete"></p-button>
+                        <!--<span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>-->
                     </div>
                 </div>
             </div>
@@ -48,6 +48,7 @@
                     </div>
                     <div class="product-grid-item-bottom">
                         <span class="product-price">${{paint.price}}</span>
+                        <p-button icon="pi pi-times" label="Delete" (click)="deletePaint(paint)"></p-button>
                         <!--<p-button icon="pi pi-shopping-cart" [disabled]="paint.inventoryStatus === 'OUTOFSTOCK'"></p-button>-->
                     </div>
                 </div>
@@ -64,8 +65,8 @@
             </div>
             <div class="field">
                 <label for="email">Paint</label>
-                <p-fileUpload name="myfile[]" url="localhost:8000/static/" accept="image/*"></p-fileUpload>
-                <small class="p-error" *ngIf="submitted && !paint.img">Image is required.</small>
+                <input name="FileInput" class="" type="file" (change)="OnImageChanged($event)" required/>
+                <small class="p-error" *ngIf="!submitted">Image is required.</small>
             </div>
             <!--<div class="field">
                 <label for="password">Password</label>

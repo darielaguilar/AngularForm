@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth-service.service';
 import { HttpHeaders } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import {SelectItem} from 'primeng/api';
+import {ConfirmationService} from 'primeng/api';
 @Component({
   selector: 'app-paintings-list',
   templateUrl: './paintings-list.component.html',
@@ -14,6 +15,8 @@ export class PaintingsListComponent implements OnInit {
 
   paint:IPainting
   paintings:IPainting[]
+  name:string
+  image:File
 
   paintDialog:boolean
   submitted:boolean
@@ -24,7 +27,7 @@ export class PaintingsListComponent implements OnInit {
 
   sortField: string;
 
-  constructor(private PaintingServ:ApiService,private auth:AuthService, private messageService:MessageService) { }
+  constructor(private PaintingServ:ApiService,private auth:AuthService, private messageService:MessageService, private confirm:ConfirmationService) { }
 
   ngOnInit(): void {
     this.loadDataView()
@@ -72,10 +75,60 @@ export class PaintingsListComponent implements OnInit {
   }
 
 
-  //Por ahora esta vacia pero es lo que se ejecuta cuando el click event del boton save del dialog se toca
-  savePaint(){}
+  //Esta es la funcion que se ejecuta cuando se toca el boton save en el dialog modal que sale cuando tocas new
+  savePaint(){
+    this.submitted = true;
+
+    const UploadData = new FormData()
+    UploadData.append('name',this.paint.name)
+    UploadData.append('img', this.image, this.image.name)
+
+    if (this.paint.name.trim()) {
+        if (this.paint.id) {
+            this.PaintingServ.updateObject('cuadro-viewset/',this.paint).subscribe({
+              next:()=>{
+                this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Updated', life: 3000});
+              },
+              error:(err)=>{console.log(err)}
+            }
+
+            );
+            this.loadDataView();
+        }
+        else {
+            this.PaintingServ.postObject('cuadro-viewset/',UploadData).subscribe({
+              next:(data)=> {
+                this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Created', life: 3000});
+
+              },
+              error:(err)=> {console.log(err)}
+            })
+
+        }
+        this.loadDataView()
+        this.paintings = [...this.paintings];
+        this.paintDialog = false;
+        this.paint = {};
+    }
+  }
 
 
+  //Metodo a llamar cuando se toca el boton delete
+  deletePaint(paint: IPainting) {
+    const headers = new HttpHeaders({
+      'Authorization': 'Token ' + this.auth.authToken
+    })
+    this.confirm.confirm({
+        message: 'Are you sure you want to delete ' + paint.name + '?',
+        header: 'Confirm',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+            this.PaintingServ.deleteObject('cuadro-viewset/'+paint.id,{headers:headers})
+            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Paint Deleted', life: 3000});
+            this.loadDataView()
+        }
+    });
+  }
 
   //Este evento tiene que ver con cambiar el tipo de ordenamiento en el DataView
   onSortChange(event) {
@@ -90,4 +143,10 @@ export class PaintingsListComponent implements OnInit {
         this.sortField = value;
     }
 }
+
+  //Este evento se activa cuando subes una imagen
+  OnImageChanged(event:any)  {
+    this.image = event.target.files[0];
+    this.paint.img = event.target.files[0];
+  }
 }

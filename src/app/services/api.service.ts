@@ -26,8 +26,10 @@ export class ApiService {
       return this.http.get(`${this.baseUrl}/`+path,token);
    }
 
-   postObject(path:string, token: {headers?: HttpHeaders | {[header: string]: string | string[]}},objPost:Object):any{
-      return this.http.post<any>(`${this.baseUrl}/`+path,objPost,token).subscribe((response: HttpResponse<any>)=>{console.log(response.status);console.log(response.headers)})
+
+   //token: {headers?: HttpHeaders | {[header: string]: string | string[]}}
+   postObject(path:string, objPost:Object):any{
+      return this.http.post<any>(`${this.baseUrl}/`+path,objPost)
    }
 
    deleteObject(path:string,token: {headers?: HttpHeaders | {[header: string]: string | string[]}}):any{
@@ -35,7 +37,7 @@ export class ApiService {
     (error)=>console.log(error))
    }
 
-   updateObject(path:string,objUpd:Object, token: {headers?: HttpHeaders | {[header: string]: string | string[]}}):any{
-    return this.http.put(`${this.baseUrl}/`+path,objUpd, token).subscribe((response: HttpResponse<any>)=>{console.log(response.status);console.log(response.headers)})
+   updateObject(path:string,objUpd:Object ):any{
+    return this.http.put(`${this.baseUrl}/`+path,objUpd).subscribe((response: HttpResponse<any>)=>{console.log(response.status);console.log(response.headers)})
    }
 }
